@@ -27,3 +27,11 @@ Ski resort guests looking to plan and optimize their experience on the mountains
 
 As someone who loves skiing and snowboarding, I make use of my favourite ski resorts' websites each winter, so creating 
 an application to enhance the guest experience aligns with my interests perfectly.
+
+
+### User Stories
+- As a user, I want to be able to purchase lift tickets and add them to my ticket purchase history.
+- As a user, I want to be able to view a list of the available equipment along with rental prices.
+- As a user, I want to be able to select equipment of my choice and rent them out.
+- As a user, I want to be select a difficulty and list all the trails of that difficulty.
+- As a user, I want to be able to select a trail and rate it on a scale of 1 to 5 stars.
