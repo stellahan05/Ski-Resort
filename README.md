@@ -1,6 +1,36 @@
-# Ski Resort Guest Assistance Application
+# Ski Resort Management System
 
-#### *Enhancing your Ski Resort Experience*
+## **What will the application do?**
+- **Trail Management:**
+  - Add new trails with varying difficulty levels.
+  - Monitor the status (open/closed) of each trail.
+  - Change the status of each trail.
+  - Display a list of all open trails.
+
+## **Who will use it?**
+
+Ski resort administrators responsible for overseeing the operations and guest experience of the resort.
+
+## **Why is this project of interest to you?**
+
+As someone who loves skiing and snowboarding, I make use of my favourite ski resorts' applications each winter, so this
+project provides a practical application of Java in the context of a real-world scenario that perfectly aligns with my 
+interests.
+
+## **User Stories**
+- As a user, I want to be able to add a trail to the resort and specify the name and difficulty level.
+- As a user, I want to be able to view a list of all the trails in the resort.
+- As a user, I want to be able to mark a trail as open/closed from the list of all trails.
+- As a user, I want to be able to select a trail from the list and view it in detail.
+- As a user, I want to be able to remove a trail from the resort.
+
+
+
+### Future Ideas
+
+#### Ski Resort Guest Assistance Application
+
+*Enhancing your Ski Resort Experience*
 
 ### **What will the application do?**
 - **Equipment Rental:**
@@ -23,13 +53,8 @@
 
 Ski resort guests looking to plan and optimize their experience on the mountains.
 
-### **Why is this project of interest to you?**
 
-As someone who loves skiing and snowboarding, I make use of my favourite ski resorts' websites each winter, so creating 
-an application to enhance the guest experience aligns with my interests perfectly.
-
-
-### User Stories
+### **User Stories**
 - As a user, I want to be able to purchase lift tickets and add them to my ticket purchase history.
 - As a user, I want to be able to view a list of the available equipment along with rental prices.
 - As a user, I want to be able to select equipment of my choice and rent them out.
