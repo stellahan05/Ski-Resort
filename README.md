@@ -22,6 +22,7 @@ interests.
 - As a user, I want to be able to view a list of all the trails in the resort.
 - As a user, I want to be able to mark a trail as open/closed from the list of all trails.
 - As a user, I want to be able to select a trail from the list and view it in detail.
+- As a user, I want to be able to write a review for a trail.
 - As a user, I want to be able to remove a trail from the resort.
 
 
