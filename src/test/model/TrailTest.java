@@ -3,19 +3,38 @@ package model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 // Test class for the Trail class
-class TrailTest {
+public class TrailTest {
     private Trail collins;
     private Trail horizon;
     private Trail blaster;
+
+    private List<Review> collinsReviews;
+    private List<Review> horizonReviews;
+    private List<Review> blasterReviews;
+
+    private Review r1;
+    private Review r2;
+    private Review r3;
 
     @BeforeEach
     void runBefore() {
         collins = new Trail("Collins", "Easy");
         horizon = new Trail("Horizon", "Intermediate");
         blaster = new Trail("Blaster", "Advanced");
+
+        collinsReviews = new ArrayList<>();
+        horizonReviews = new ArrayList<>();
+        blasterReviews = new ArrayList<>();
+
+        r1 = new Review(1, "Super icy conditions", "Stella");
+        r2 = new Review(3, "Decent ride.", "Han");
+        r3 = new Review(5, "My favourite trail.", "d");
     }
 
     @Test
@@ -46,6 +65,16 @@ class TrailTest {
     }
 
     @Test
+    void testGetReviews() {
+        assertTrue(collins.getReviews().isEmpty());
+        collins.addReview(r1);
+        collinsReviews.add(r1);
+        assertEquals(collinsReviews, collins.getReviews());
+        assertTrue(horizon.getReviews().isEmpty());
+        assertTrue(blaster.getReviews().isEmpty());
+    }
+
+    @Test
     void testSetStatus() {
         assertTrue(collins.isOpen());
         collins.setStatus(false);
@@ -55,15 +84,49 @@ class TrailTest {
     }
 
     @Test
+    void testAddReview() {
+        assertTrue(collins.getReviews().isEmpty());
+        collins.addReview(r1);
+        collinsReviews.add(r1);
+        assertEquals(collinsReviews, collins.getReviews());
+        assertEquals(1, collinsReviews.size());
+        assertTrue(collinsReviews.contains(r1));
+        collins.addReview(r2);
+        collinsReviews.add(r2);
+        assertEquals(collinsReviews, collins.getReviews());
+        assertEquals(2, collinsReviews.size());
+        assertTrue(collinsReviews.contains(r1));
+        assertTrue(collinsReviews.contains(r2));
+        horizon.addReview(r2);
+        horizonReviews.add(r2);
+        assertEquals(horizonReviews, horizon.getReviews());
+        blaster.addReview(r3);
+        blasterReviews.add(r3);
+        assertEquals(blasterReviews, blaster.getReviews());
+    }
+
+    @Test
+    void testCalculateAverageRating() {
+        assertEquals(0.0, collins.calculateAverageRating());
+        collins.addReview(r1);
+        assertEquals(1.0, collins.calculateAverageRating());
+        collins.addReview(r2);
+        assertEquals(2.0, collins.calculateAverageRating());
+        collins.addReview(r3);
+        assertEquals(3.0, collins.calculateAverageRating());
+    }
+
+    @Test
     void testToString() {
-        assertEquals("Trail Name: Collins, Difficulty: Easy, Status: Open",
+        assertEquals("Trail Name: Collins, Difficulty: Easy, Status: Open, Avg Rating: 0.0",
                 collins.toString());
         collins.setStatus(false);
-        assertEquals("Trail Name: Collins, Difficulty: Easy, Status: Closed",
+        collins.addReview(r3);
+        assertEquals("Trail Name: Collins, Difficulty: Easy, Status: Closed, Avg Rating: 5.0",
                 collins.toString());
-        assertEquals("Trail Name: Horizon, Difficulty: Intermediate, Status: Open",
+        assertEquals("Trail Name: Horizon, Difficulty: Intermediate, Status: Open, Avg Rating: 0.0",
                 horizon.toString());
-        assertEquals("Trail Name: Blaster, Difficulty: Advanced, Status: Open",
+        assertEquals("Trail Name: Blaster, Difficulty: Advanced, Status: Open, Avg Rating: 0.0",
                 blaster.toString());
     }
 }

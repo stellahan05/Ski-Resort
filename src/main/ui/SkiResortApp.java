@@ -1,5 +1,6 @@
 package ui;
 
+import model.Review;
 import model.Trail;
 import model.Trails;
 
@@ -51,6 +52,8 @@ public class SkiResortApp {
             setTrailStatus();
         } else if (command.equals("r")) {
             removeTrail();
+        } else if (command.equals("w")) {
+            writeReview();
         } else {
             System.out.println("Selection not valid...");
         }
@@ -64,6 +67,7 @@ public class SkiResortApp {
         System.out.println("\tv -> view trails");
         System.out.println("\ts -> set trail status as");
         System.out.println("\tr -> remove trail");
+        System.out.println("\tw -> write a review");
         System.out.println("\tq -> quit");
     }
 
@@ -98,12 +102,33 @@ public class SkiResortApp {
                 System.out.println("- " + trail);
             }
             System.out.println("Select a trail to view it in detail:");
-            String name = input.next();
-            if (null == trails.findTrail(name)) {
-                System.out.println("Trail not found.");
+            viewTrailDetails();
+        }
+    }
+
+    // EFFECTS: displays detailed view of trail
+    private void viewTrailDetails() {
+        String name = input.next();
+        if (null == trails.findTrail(name)) {
+            System.out.println("Trail not found.");
+        } else {
+            Trail trail = trails.findTrail(name);
+            System.out.println(trail.toString());
+            String choice = "";
+            while (!(choice.equals("y") || choice.equals("n"))) {
+                System.out.println("Would you like to view this trail's reviews? Enter y for yes, n for no: ");
+                choice = input.next().toLowerCase();
+            }
+            if (choice.equals("y")) {
+                if (trail.getReviews().isEmpty()) {
+                    System.out.println("There are no reviews yet!");
+                } else {
+                    for (Review review : trail.getReviews()) {
+                        System.out.println("- " + review.toString());
+                    }
+                }
             } else {
-                Trail trail = trails.findTrail(name);
-                System.out.println(trail.toString());
+                System.out.println("Closing trail details now.");
             }
         }
     }
@@ -126,11 +151,8 @@ public class SkiResortApp {
                 status = status.toLowerCase();
             }
 
-            if (status.equals("o")) {
-                trail.setStatus(true);
-            } else {
-                trail.setStatus(false);
-            }
+            trail.setStatus(status.equals("o"));
+
             System.out.println("Status of " + name + " set as " + (status.equals("o") ? "open." : "closed."));
         }
     }
@@ -147,6 +169,33 @@ public class SkiResortApp {
             Trail trailToRemove = trails.findTrail(name);
             trails.removeTrail(trailToRemove);
             System.out.println(name + " successfully removed.");
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: conducts writing a review of a trail
+    private void writeReview() {
+        System.out.println("Enter trail name: ");
+        String name = input.next();
+
+        if (null == trails.findTrail(name)) {
+            System.out.println("That trail does not exist...");
+        } else {
+            Trail trailToReview = trails.findTrail(name);
+            System.out.println("Enter your review: ");
+            String description = input.next();
+            System.out.println("Enter your name: ");
+            String author = input.next();
+
+            int rating = 0;
+            while (! ((0 < rating) && (rating < 6))) {
+                System.out.println("Enter you rating from 1-5 (1 = would not recommend, 5 = highly recommend): ");
+                rating = input.nextInt();
+            }
+
+            Review review = new Review(rating, description, author);
+            trailToReview.addReview(review);
+            System.out.println("Review added successfully.");
         }
     }
 }
