@@ -19,7 +19,6 @@ public class Trails {
         trails.add(trail);
     }
 
-    // REQUIRES: (trails.numOfTrails() != 0) and trails.contains(trail)
     // MODIFIES: this
     // EFFECTS: removes given trail from the list
     public void removeTrail(Trail trail) {

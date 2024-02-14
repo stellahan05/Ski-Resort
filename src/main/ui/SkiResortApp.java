@@ -97,6 +97,7 @@ public class SkiResortApp {
         System.out.println("\nTrail added successfully.");
     }
 
+    // MODIFIES: this
     // EFFECTS: displays a list of all trails in the resort
     private void viewTrails() {
         if (0 == trails.numOfTrails()) {
@@ -110,6 +111,7 @@ public class SkiResortApp {
         }
     }
 
+    // MODIFIES: this
     // EFFECTS: displays detailed view of trail
     private void viewTrailDetails() {
         System.out.println("Select a trail to view it in detail:");
@@ -123,6 +125,7 @@ public class SkiResortApp {
         }
     }
 
+    // MODIFIES: this
     // EFFECTS: prompts user to view the reviews of selected trail
     private void viewTrailReviews(Trail trail) {
         System.out.println("Would you like to view this trail's reviews?");
