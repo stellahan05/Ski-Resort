@@ -24,6 +24,8 @@ interests.
 - As a user, I want to be able to select a trail from the list and view it in detail.
 - As a user, I want to be able to write a review for a trail.
 - As a user, I want to be able to remove a trail from the resort.
+- As a user, I want to be able to save my ski resort app with the list of trails to file (if I so choose)
+- As a user, I want to be able to be able to load my ski resort app from file (if I so choose)
 
 
 
