@@ -65,8 +65,8 @@ public class Trails implements Writable {
     private JSONArray trailsToJson() {
         JSONArray jsonArray = new JSONArray();
 
-        for (Trail t : trails) {
-            jsonArray.put(t.toJson());
+        for (Trail trail : trails) {
+            jsonArray.put(trail.toJson());
         }
 
         return jsonArray;

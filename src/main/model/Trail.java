@@ -83,8 +83,8 @@ public class Trail implements Writable {
     private JSONArray reviewsToJson() {
         JSONArray jsonArray = new JSONArray();
 
-        for (Review r : reviews) {
-            jsonArray.put(r.toJson());
+        for (Review review : reviews) {
+            jsonArray.put(review.toJson());
         }
 
         return jsonArray;
