@@ -1,10 +1,14 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.List;
 import java.util.ArrayList;
 
 // Represents a list of Trails from which you can add and remove trails.
-public class Trails {
+public class Trails implements Writable {
     private List<Trail> trails;
 
     // EFFECTS: a new list of trails currently containing no trails is created
@@ -48,5 +52,23 @@ public class Trails {
             }
         }
         return null;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("trails", trailsToJson());
+        return json;
+    }
+
+    // EFFECTS: returns trails in this list of trails as a JSON array
+    private JSONArray trailsToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Trail t : trails) {
+            jsonArray.put(t.toJson());
+        }
+
+        return jsonArray;
     }
 }

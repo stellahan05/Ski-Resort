@@ -1,7 +1,10 @@
 package model;
 
+import org.json.JSONObject;
+import persistence.Writable;
+
 // Represents a review having a rating, description, and an author.
-public class Review {
+public class Review implements Writable {
 
     private String description;
     private String author;
@@ -30,5 +33,14 @@ public class Review {
     // EFFECTS: returns a string representation of the details of the review
     public String toString() {
         return ("Rating: " + rating + ", Description: " + description + ", Author: " + author);
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("rating", rating);
+        json.put("description", description);
+        json.put("author", author);
+        return json;
     }
 }

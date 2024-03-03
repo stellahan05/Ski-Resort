@@ -1,10 +1,14 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.ArrayList;
 import java.util.List;
 
 // Represents a trail having a name, difficulty level, and status (open/closed).
-public class Trail {
+public class Trail implements Writable {
     private String name;
     private String difficulty;
     private boolean isOpen;
@@ -63,5 +67,26 @@ public class Trail {
         String status = isOpen ? "Open" : "Closed";
         return ("Trail Name: " + name + ", Difficulty: " + difficulty
                 + ", Status: " + status + ", Avg Rating: " + calculateAverageRating());
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        json.put("difficulty", difficulty);
+        json.put("isOpen", isOpen);
+        json.put("reviews", reviewsToJson());
+        return json;
+    }
+
+    // EFFECTS: returns reviews of this trail as a JSON array
+    private JSONArray reviewsToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Review r : reviews) {
+            jsonArray.put(r.toJson());
+        }
+
+        return jsonArray;
     }
 }
