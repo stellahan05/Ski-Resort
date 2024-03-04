@@ -1,5 +1,6 @@
 package persistence;
 
+import model.Review;
 import model.Trail;
 import model.Trails;
 
@@ -83,5 +84,7 @@ public class JsonReader {
         String description = jsonObject.getString("description");
         String author = jsonObject.getString("author");
         int rating = jsonObject.getInt("rating");
+        Review review = new Review(rating, description, author);
+        trail.addReview(review);
     }
 }
