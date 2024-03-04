@@ -3,20 +3,29 @@ package ui;
 import model.Review;
 import model.Trail;
 import model.Trails;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
 
 // Ski resort application for admin to monitor trails
 public class SkiResortApp {
-    private final Trails trails;
+    private Trails trails;
     private final Scanner input;
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
+    private static final String JSON_STORE = "./data/skiResort.json";
 
     // EFFECTS: runs the ski resort application
-    public SkiResortApp() {
+    public SkiResortApp() throws FileNotFoundException {
         trails = new Trails();
         input = new Scanner(System.in);
         input.useDelimiter("\n");
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
         run();
     }
 
@@ -54,6 +63,10 @@ public class SkiResortApp {
             removeTrail();
         } else if (command.equals("w")) {
             writeReview();
+        } else if (command.equals("k")) {
+            saveTrails();
+        } else if (command.equals("l")) {
+            loadTrails();
         } else {
             System.out.println("Selection not valid...");
         }
@@ -68,6 +81,8 @@ public class SkiResortApp {
         System.out.println("\ts -> set trail status as");
         System.out.println("\tr -> remove trail");
         System.out.println("\tw -> write a review");
+        System.out.println("\tk -> save trails to file");
+        System.out.println("\tl -> load trails from file");
         System.out.println("\tq -> quit");
     }
 
@@ -210,6 +225,29 @@ public class SkiResortApp {
             Review review = new Review(rating, description, author);
             trailToReview.addReview(review);
             System.out.println("Review added successfully.");
+        }
+    }
+
+    // EFFECTS: saves the entire ski resort to file
+    private void saveTrails() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(trails);
+            jsonWriter.close();
+            System.out.println("Saved all trails to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads trails from file
+    private void loadTrails() {
+        try {
+            trails = jsonReader.read();
+            System.out.println("Loaded ski resort from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
         }
     }
 }

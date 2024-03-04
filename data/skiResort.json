@@ -1,0 +1,24 @@
+{"trails": [
+    {
+        "difficulty": "Easy",
+        "isOpen": true,
+        "reviews": [],
+        "name": "hehe"
+    },
+    {
+        "difficulty": "Intermediate",
+        "isOpen": true,
+        "reviews": [{
+            "author": "stella",
+            "rating": 5,
+            "description": "5"
+        }],
+        "name": "haha"
+    },
+    {
+        "difficulty": "Advanced",
+        "isOpen": true,
+        "reviews": [],
+        "name": "hahaha"
+    }
+]}
