@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 // Test class for the Trails class
@@ -20,6 +21,21 @@ public class TrailsTest {
         collins = new Trail("Collins", "Easy");
         horizon = new Trail("Horizon", "Intermediate");
         blaster = new Trail("Blaster", "Advanced");
+    }
+
+    @Test
+    void testGetTrails() {
+        List<Trail> allTrails = new ArrayList<>();
+        assertEquals(allTrails, trails.getTrails());
+        assertEquals(0, allTrails.size());
+        trails.addTrail(collins);
+        allTrails.add(collins);
+        assertEquals(allTrails, trails.getTrails());
+        assertEquals(1, allTrails.size());
+        trails.addTrail(horizon);
+        allTrails.add(horizon);
+        assertEquals(allTrails, trails.getTrails());
+        assertEquals(2, allTrails.size());
     }
 
     @Test

@@ -3,6 +3,8 @@ package persistence;
 import model.Review;
 import model.Trail;
 import model.Trails;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -48,9 +50,5 @@ public class JsonReaderTest extends JsonTest {
         } catch (IOException e) {
             fail("Couldn't read from file");
         }
-
     }
-
-
-
 }
