@@ -1,5 +1,6 @@
 package model;
 
+import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -42,5 +43,27 @@ public class ReviewTest {
     @Test
     void testToString() {
         assertEquals("Rating: 1, Description: Super icy conditions, Author: Stella", r1.toString());
+    }
+
+    @Test
+    void testToJson() {
+        JSONObject object1 = new JSONObject();
+        object1.put("rating", 1);
+        object1.put("description", "Super icy conditions");
+        object1.put("author", "Stella");
+
+        JSONObject object2 = new JSONObject();
+        object2.put("rating", 3);
+        object2.put("description", "Decent ride.");
+        object2.put("author", "Han");
+
+        JSONObject object3 = new JSONObject();
+        object3.put("rating", 5);
+        object3.put("description", "My favourite trail.");
+        object3.put("author", "d");
+
+        assertEquals(object1.toString(), r1.toJson().toString());
+        assertEquals(object2.toString(), r2.toJson().toString());
+        assertEquals(object3.toString(), r3.toJson().toString());
     }
 }

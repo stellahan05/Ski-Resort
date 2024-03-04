@@ -80,7 +80,7 @@ public class Trail implements Writable {
     }
 
     // EFFECTS: returns reviews of this trail as a JSON array
-    private JSONArray reviewsToJson() {
+    protected JSONArray reviewsToJson() {
         JSONArray jsonArray = new JSONArray();
 
         for (Review review : reviews) {

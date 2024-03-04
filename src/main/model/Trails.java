@@ -67,7 +67,7 @@ public class Trails implements Writable {
     }
 
     // EFFECTS: returns trails in this list of trails as a JSON array
-    private JSONArray trailsToJson() {
+    protected JSONArray trailsToJson() {
         JSONArray jsonArray = new JSONArray();
 
         for (Trail trail : trails) {

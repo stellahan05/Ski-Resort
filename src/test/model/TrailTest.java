@@ -1,5 +1,7 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -129,4 +131,41 @@ public class TrailTest {
         assertEquals("Trail Name: Blaster, Difficulty: Advanced, Status: Open, Avg Rating: 0.0",
                 blaster.toString());
     }
+
+    @Test
+    void testToJson() {
+        collins.addReview(r1);
+        collins.addReview(r2);
+        collins.addReview(r3);
+
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("name", "Collins");
+        jsonObject.put("difficulty", "Easy");
+        jsonObject.put("isOpen", true);
+
+        JSONArray reviewsJsonArray = new JSONArray();
+        reviewsJsonArray.put(r1.toJson());
+        reviewsJsonArray.put(r2.toJson());
+        reviewsJsonArray.put(r3.toJson());
+
+        jsonObject.put("reviews", reviewsJsonArray);
+
+        assertEquals(jsonObject.toString(), collins.toJson().toString());
+    }
+
+    @Test
+    void testReviewsToJson() {
+        collins.addReview(r1);
+        collins.addReview(r2);
+
+        JSONArray expectedArray = new JSONArray();
+        expectedArray.put(r1.toJson());
+        expectedArray.put(r2.toJson());
+
+        JSONArray actualArray = collins.reviewsToJson();
+
+        assertEquals(expectedArray.toString(), actualArray.toString());
+    }
+
+
 }
