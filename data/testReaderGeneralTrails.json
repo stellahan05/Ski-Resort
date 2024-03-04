@@ -1,0 +1,22 @@
+{"trails": [
+  {
+    "difficulty": "Easy",
+    "isOpen": true,
+    "reviews": [{
+      "author": "Stella",
+      "rating": 1,
+      "description": "horrible"
+    }],
+    "name": "Collins"
+  },
+  {
+    "difficulty": "Intermediate",
+    "isOpen": true,
+    "reviews": [{
+      "author": "Han",
+      "rating": 5,
+      "description": "amazing"
+    }],
+    "name": "Horizon"
+  }
+]}

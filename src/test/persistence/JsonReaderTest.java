@@ -3,8 +3,7 @@ package persistence;
 import model.Review;
 import model.Trail;
 import model.Trails;
-import org.json.JSONArray;
-import org.json.JSONObject;
+
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -27,7 +26,7 @@ public class JsonReaderTest extends JsonTest {
 
     @Test
     void testReaderEmptyTrails() {
-        JsonReader reader = new JsonReader("./data/testReaderEmptyWorkRoom.json");
+        JsonReader reader = new JsonReader("./data/testReaderEmptyTrails.json");
         try {
             Trails trails = reader.read();
             assertEquals(0, trails.numOfTrails());
@@ -41,12 +40,19 @@ public class JsonReaderTest extends JsonTest {
         JsonReader reader = new JsonReader("./data/testReaderGeneralTrails.json");
         try {
             Trails trails = reader.read();
-            List<Trail> allTrails = trails.getTrails();
-            assertEquals(2, allTrails.size());
-            List<Review> collinsReviews = allTrails.get(0).getReviews();
-            List<Review> horizonReviews = allTrails.get(1).getReviews();
-            checkTrail("Collins", "Easy", true, collinsReviews, allTrails.get(0));
-            checkTrail("Horizon", "Intermediate", true, horizonReviews, allTrails.get(1));
+            assertEquals(2, trails.numOfTrails());
+            Trail collins = trails.getTrails().get(0);
+            assertEquals("Collins", collins.getName());
+            assertEquals("Easy", collins.getDifficulty());
+            assertTrue(collins.isOpen());
+            Trail horizon = trails.getTrails().get(1);
+            assertEquals("Horizon", horizon.getName());
+            assertEquals("Intermediate", horizon.getDifficulty());
+            assertTrue(horizon.isOpen());
+            List<Review> collinsReviews = trails.getTrails().get(0).getReviews();
+            List<Review> horizonReviews = trails.getTrails().get(1).getReviews();
+            checkTrail("Collins", "Easy", true, collinsReviews, trails.getTrails().get(0));
+            checkTrail("Horizon", "Intermediate", true, horizonReviews, trails.getTrails().get(1));
         } catch (IOException e) {
             fail("Couldn't read from file");
         }

@@ -49,25 +49,26 @@ public class JsonWriterTest extends JsonTest {
             Trail horizon = new Trail("Horizon", "Intermediate");
             Review review1 = new Review(1, "horrible", "Stella");
             Review review5 = new Review(5, "amazing", "Han");
-            trails.addTrail(collins);
-            trails.addTrail(horizon);
-            collins.addReview(review1);
-            horizon.addReview(review5);
             JsonWriter writer = new JsonWriter("./data/testWriterGeneralTrails.json");
             writer.open();
             writer.write(trails);
             writer.close();
 
-            JsonReader reader = new JsonReader("./data/testWriterGeneralWorkroom.json");
+            JsonReader reader = new JsonReader("./data/testWriterGeneralTrails.json");
             trails = reader.read();
-            List<Trail> allTrails = trails.getTrails();
-            assertEquals(2, allTrails.size());
+            trails.addTrail(collins);
+            trails.addTrail(horizon);
+            collins.addReview(review1);
+            horizon.addReview(review5);
+            assertEquals(2, trails.getTrails().size());
             List<Review> collinsReviews = collins.getReviews();
             List<Review> horizonReviews = horizon.getReviews();
             assertEquals(1, collinsReviews.size());
             assertEquals(1, horizonReviews.size());
-            checkTrail("Collins", "Easy", true, collinsReviews, allTrails.get(0));
-            checkTrail("Horizon", "Intermediate", true, horizonReviews, allTrails.get(1));
+            checkTrail("Collins", "Easy", true, collinsReviews,
+                    trails.getTrails().get(0));
+            checkTrail("Horizon", "Intermediate", true, horizonReviews,
+                    trails.getTrails().get(1));
         } catch (IOException e) {
             fail("Exception should not have been thrown");
         }

@@ -1,6 +1,5 @@
 package persistence;
 
-import model.Review;
 import model.Trail;
 import model.Trails;
 
@@ -8,7 +7,6 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.List;
 import java.util.stream.Stream;
 
 import org.json.*;
@@ -43,7 +41,6 @@ public class JsonReader {
 
     // EFFECTS: parses trails from JSON object and returns it
     private Trails parseTrails(JSONObject jsonObject) {
-        String name = jsonObject.getString("name");
         Trails trails = new Trails();
         addTrails(trails, jsonObject);
         return trails;
