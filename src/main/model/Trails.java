@@ -16,6 +16,11 @@ public class Trails implements Writable {
         trails = new ArrayList<>();
     }
 
+    // EFFECTS: returns the list of all trails
+    public List<Trail> getTrails() {
+        return trails;
+    }
+
     // REQUIRES: !(trails.contains(trail)), ignoring case
     // MODIFIES: this
     // EFFECTS: adds given trail to the list
