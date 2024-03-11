@@ -3,6 +3,7 @@ package ui;
 import javax.swing.*;
 import javax.swing.event.*;
 import java.awt.*;
+import java.io.IOException;
 
 public class SkiResortGUI extends JPanel implements ListSelectionListener {
     private JList trailList;
@@ -10,11 +11,16 @@ public class SkiResortGUI extends JPanel implements ListSelectionListener {
 
     private static final String addTrailString = "Add Trail";
     private static final String removeTrailString = "Remove Trail";
+    private static final String saveString = "Save";
+    private static final String loadString = "Load";
     private JButton removeButton;
     private JButton addButton;
+    private JButton saveButton;
+    private JButton loadButton;
     private JTextField trailName;
     private AddTrailListener addTrailListener;
     private JPanel buttonPane;
+    private SkiResortApp skiResortApp;
 
     public SkiResortGUI() {
         super(new BorderLayout());
@@ -34,6 +40,8 @@ public class SkiResortGUI extends JPanel implements ListSelectionListener {
         trailName = new JTextField(10);
         initializeAddButton();
         initializeRemoveButton();
+        initializeSaveButton();
+        initializeLoadButton();
 
         trailName.addActionListener(addTrailListener);
         trailName.getDocument().addDocumentListener(addTrailListener);
@@ -59,6 +67,19 @@ public class SkiResortGUI extends JPanel implements ListSelectionListener {
         removeButton.addActionListener(new RemoveTrailListener(trailList, listModel));
     }
 
+    public void initializeSaveButton() {
+        saveButton = new JButton(saveString);
+        saveButton.setActionCommand(saveString);
+        saveButton.addActionListener(e -> saveDataToFile());
+    }
+
+    public void initializeLoadButton() {
+        loadButton = new JButton(loadString);
+        loadButton.setActionCommand(loadString);
+        loadButton.addActionListener(e -> loadDataFromFile());
+    }
+
+
     public void initializeButtonPane() {
         buttonPane = new JPanel();
         buttonPane.setLayout(new BoxLayout(buttonPane, BoxLayout.LINE_AXIS));
@@ -68,7 +89,22 @@ public class SkiResortGUI extends JPanel implements ListSelectionListener {
         buttonPane.add(Box.createHorizontalStrut(5));
         buttonPane.add(trailName);
         buttonPane.add(addButton);
+        buttonPane.add(Box.createHorizontalStrut(5));
+        buttonPane.add(saveButton);
+        buttonPane.add(loadButton);
         buttonPane.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+    }
+
+    private void saveDataToFile() {
+        skiResortApp.saveTrails();
+        JOptionPane.showMessageDialog(this, "Data saved successfully!",
+                saveString, JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    private void loadDataFromFile() {
+        skiResortApp.loadTrails();
+        JOptionPane.showMessageDialog(this, "Data loaded successfully!",
+                loadString, JOptionPane.INFORMATION_MESSAGE);
     }
 
     @Override
