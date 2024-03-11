@@ -88,7 +88,7 @@ public class SkiResortApp {
 
     // MODIFIES: this
     // EFFECTS: conducts addition of trail
-    private void addTrail() {
+    void addTrail() {
         System.out.println("Enter trail name:");
         String name = input.next();
         String difficulty = "";
@@ -114,7 +114,7 @@ public class SkiResortApp {
 
     // MODIFIES: this
     // EFFECTS: displays a list of all trails in the resort
-    private void viewTrails() {
+    void viewTrails() {
         if (0 == trails.numOfTrails()) {
             System.out.println("There are no trails in the resort!");
         } else {
@@ -229,7 +229,7 @@ public class SkiResortApp {
     }
 
     // EFFECTS: saves the entire ski resort to file
-    private void saveTrails() {
+    void saveTrails() {
         try {
             jsonWriter.open();
             jsonWriter.write(trails);
@@ -242,7 +242,7 @@ public class SkiResortApp {
 
     // MODIFIES: this
     // EFFECTS: loads trails from file
-    private void loadTrails() {
+    void loadTrails() {
         try {
             trails = jsonReader.read();
             System.out.println("Loaded ski resort from " + JSON_STORE);
