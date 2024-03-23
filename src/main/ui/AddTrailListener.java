@@ -1,5 +1,7 @@
 package ui;
 
+import model.Trail;
+
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -8,22 +10,26 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class AddTrailListener implements ActionListener, DocumentListener {
-    private DefaultListModel<String> listModel;
+    private DefaultListModel<Trail> listModel;
     private JTextField trailName;
+    private JTextField trailDifficulty;
+    private JList<Trail> trailList;
     private JButton addTrailButton;
-    private JList<String> trailList;
 
     private boolean alreadyEnabled = false;
 
-    public AddTrailListener(JButton button, JTextField textField, DefaultListModel<String> model, JList<String> list) {
-        this.addTrailButton = button;
-        this.trailName = textField;
+    public AddTrailListener(JButton addTrailButton, JTextField trailName, JTextField trailDifficulty,
+                            DefaultListModel<Trail> model, JList<Trail> list) {
+        this.addTrailButton = addTrailButton;
+        this.trailName = trailName;
+        this.trailDifficulty = trailDifficulty;
         this.listModel = model;
         this.trailList = list;
     }
 
     public void actionPerformed(ActionEvent e) {
         String name = trailName.getText();
+        String difficulty = trailDifficulty.getText();
 
         if (name.equals("") || alreadyInList(name)) {
             Toolkit.getDefaultToolkit().beep();
@@ -32,18 +38,25 @@ public class AddTrailListener implements ActionListener, DocumentListener {
             return;
         }
 
-        int index = listModel.getSize();
-
-        listModel.addElement(trailName.getText());
+        Trail trail = new Trail(name, difficulty); // Create a Trail object with name and difficulty
+        listModel.addElement(trail);
         trailName.requestFocusInWindow();
         trailName.setText("");
 
+        // Select the new item and make it visible
+        int index = listModel.getSize() - 1;
         trailList.setSelectedIndex(index);
         trailList.ensureIndexIsVisible(index);
     }
 
     protected boolean alreadyInList(String name) {
-        return listModel.contains(name);
+        for (int i = 0; i < listModel.getSize(); i++) {
+            Trail trail = listModel.getElementAt(i);
+            if (trail.getName().equals(name)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public void insertUpdate(DocumentEvent e) {

@@ -1,14 +1,16 @@
 package ui;
 
+import model.Trail;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class RemoveTrailListener implements ActionListener {
-    private JList<String> trailList;
-    private DefaultListModel<String> listModel;
+    private JList<Trail> trailList;
+    private DefaultListModel<Trail> listModel;
 
-    public RemoveTrailListener(JList<String> list, DefaultListModel<String> model) {
+    public RemoveTrailListener(JList<Trail> list, DefaultListModel<Trail> model) {
         this.trailList = list;
         this.listModel = model;
     }

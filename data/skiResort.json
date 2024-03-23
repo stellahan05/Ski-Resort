@@ -1,10 +1,6 @@
 {"trails": [{
     "difficulty": "Easy",
     "isOpen": true,
-    "reviews": [{
-        "author": "5",
-        "rating": 5,
-        "description": "amazing"
-    }],
-    "name": "haha"
+    "reviews": [],
+    "name": "hello"
 }]}
