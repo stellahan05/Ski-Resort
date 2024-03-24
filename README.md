@@ -27,6 +27,21 @@ interests.
 - As a user, I want to be able to save my ski resort app with the list of trails to file (if I so choose)
 - As a user, I want to be able to be able to load my ski resort app from file (if I so choose)
 
+## **Instructions for Grader**
+- You can add a trail to the list of trails by entering the name and difficulty of the new trail in the respective
+input fields, then by clicking on the "Add Trail" button. The new trail will be added to the list
+displayed in the GUI.
+- You can remove a trail from the list by selecting the trail in the displayed list, then by clicking on the 
+"Remove Trail" button. The selected trail will be removed from the list.
+- You can filter the list of displayed trails by clicking the "Filter by Difficulty" dropdown menu then by selecting
+the desired difficulty level from "All", "Easy", "Intermediate", and "Advanced". The list of displayed trails will show
+only the trails with the selected difficulty level.
+- You can locate my visual component on the left of each trail name in the displayed list as a coloured shape based on 
+the trail's difficulty.
+- You can save the state of my application by clicking on the "Save" button. The current list of trails will be saved
+to skiResort.json in the data package.
+- You can reload the state of my application by clicking on the "Load" button. The previously saved json file will be
+loaded into the GUI.
 
 
 ### Future Ideas
