@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+// Represents the GUI for managing ski resort trails
 public class SkiResortGUI extends JPanel implements ListSelectionListener {
     private JList trailList;
     private DefaultListModel<Trail> listModel;
@@ -22,16 +23,20 @@ public class SkiResortGUI extends JPanel implements ListSelectionListener {
     private static final String removeTrailString = "Remove Trail";
     private static final String saveString = "Save";
     private static final String loadString = "Load";
+
     private JButton removeButton;
     private JButton addButton;
     private JButton saveButton;
     private JButton loadButton;
+
     private JTextField trailName;
     private JTextField trailDifficulty;
+
     private AddTrailListener addTrailListener;
     private JPanel buttonPane;
+    private JComboBox<String> difficultyFilter;
 
-    private static final String FILE_NAME = "trails.json";
+    private static final String FILE_NAME = "./data/skiResort.json";
 
     public SkiResortGUI() {
         super(new BorderLayout());
@@ -51,12 +56,16 @@ public class SkiResortGUI extends JPanel implements ListSelectionListener {
         trailName.addActionListener(addTrailListener);
         trailName.getDocument().addDocumentListener(addTrailListener);
 
+        initializeDifficultyFilter();
+
         initializeInputPanel();
         initializeButtonPane();
 
         add(buttonPane, BorderLayout.SOUTH);
     }
 
+    // MODIFIES: this
+    // EFFECTS: initializes list model with default trails
     private void initializeListModel() {
         listModel = new DefaultListModel<>();
         listModel.addElement(new Trail("Collins", "Easy"));
@@ -64,6 +73,8 @@ public class SkiResortGUI extends JPanel implements ListSelectionListener {
         listModel.addElement(new Trail("Blaster", "Advanced"));
     }
 
+    // MODIFIES: this
+    // EFFECTS: initializes trail list
     private void initializeTrailList() {
         trailList = new JList<>(listModel);
         trailList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -75,6 +86,8 @@ public class SkiResortGUI extends JPanel implements ListSelectionListener {
         add(listScrollPane, BorderLayout.CENTER);
     }
 
+    // MODIFIES: this
+    // EFFECTS: initialize the add trail button
     private void initializeAddButton() {
         addButton = new JButton(addTrailString);
         addButton.setEnabled(false);
@@ -83,24 +96,62 @@ public class SkiResortGUI extends JPanel implements ListSelectionListener {
         addButton.addActionListener(addTrailListener);
     }
 
+    // MODIFIES: this
+    // EFFECTS: initializes the remove trail button
     private void initializeRemoveButton() {
         removeButton = new JButton(removeTrailString);
         removeButton.setActionCommand(removeTrailString);
         removeButton.addActionListener(new RemoveTrailListener(trailList, listModel));
     }
 
+    // MODIFIES: this
+    // EFFECTS: initializes the save button
     private void initializeSaveButton() {
         saveButton = new JButton(saveString);
         saveButton.setActionCommand(saveString);
         saveButton.addActionListener(e -> saveDataToFile());
     }
 
+    // MODIFIES: this
+    // EFFECTS: initializes the load button
     private void initializeLoadButton() {
         loadButton = new JButton(loadString);
         loadButton.setActionCommand(loadString);
         loadButton.addActionListener(e -> loadDataFromFile());
     }
 
+    // MODIFIES: this
+    // EFFECTS: initializes difficulty filter dropdown
+    private void initializeDifficultyFilter() {
+        String[] difficultyLevels = { "All", "Easy", "Intermediate", "Advanced" };
+        difficultyFilter = new JComboBox<>(difficultyLevels);
+        difficultyFilter.addActionListener(e -> filterTrailsByDifficulty((String) difficultyFilter.getSelectedItem()));
+        JPanel filterPanel = new JPanel();
+        filterPanel.add(new JLabel("Filter by Difficulty:"));
+        filterPanel.add(difficultyFilter);
+        add(filterPanel, BorderLayout.WEST);
+    }
+
+    // REQUIRES: selectedDifficulty is one of "All", "Easy", "Intermediate", "Advanced"
+    // MODIFIES: this
+    // EFFECTS: filters displayed trails based on selected difficulty
+    private void filterTrailsByDifficulty(String selectedDifficulty) {
+        if (selectedDifficulty.equals("All")) {
+            trailList.setModel(listModel);
+        } else {
+            DefaultListModel<Trail> filteredModel = new DefaultListModel<>();
+            for (int i = 0; i < listModel.getSize(); i++) {
+                Trail trail = listModel.getElementAt(i);
+                if (trail.getDifficulty().equalsIgnoreCase(selectedDifficulty)) {
+                    filteredModel.addElement(trail);
+                }
+            }
+            trailList.setModel(filteredModel);
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: initializes inout panel for entering new trail details
     private void initializeInputPanel() {
         JPanel inputPanel = new JPanel();
         inputPanel.setLayout(new FlowLayout());
@@ -110,6 +161,8 @@ public class SkiResortGUI extends JPanel implements ListSelectionListener {
         add(inputPanel, BorderLayout.NORTH);
     }
 
+    // MODIFIES: this
+    // EFFECTS: initializes button panel with action buttons
     private void initializeButtonPane() {
         buttonPane = new JPanel();
         buttonPane.setLayout(new BoxLayout(buttonPane, BoxLayout.LINE_AXIS));
@@ -125,7 +178,8 @@ public class SkiResortGUI extends JPanel implements ListSelectionListener {
         buttonPane.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
     }
 
-    // Save trails to file
+    // MODIFIES: data
+    // EFFECTS: saves trails to file
     private void saveDataToFile() {
         try (FileWriter fileWriter = new FileWriter(FILE_NAME)) {
             List<Trail> trails = new ArrayList<>();
@@ -147,7 +201,8 @@ public class SkiResortGUI extends JPanel implements ListSelectionListener {
         }
     }
 
-    // Load trails from file
+    // MODIFIES: this
+    // EFFECTS: loads trails from file
     private void loadDataFromFile() {
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(FILE_NAME))) {
             StringBuilder stringBuilder = new StringBuilder();
@@ -175,6 +230,7 @@ public class SkiResortGUI extends JPanel implements ListSelectionListener {
         }
     }
 
+    // EFFECTS: enables or disables remove button based on trail selection
     @Override
     public void valueChanged(ListSelectionEvent e) {
         if (e.getValueIsAdjusting() == false) {
@@ -186,6 +242,7 @@ public class SkiResortGUI extends JPanel implements ListSelectionListener {
         }
     }
 
+    // EFFECTS: creates and displays the GUI
     private static void createAndShowGUI() {
         JFrame frame = new JFrame("Ski Resort App");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

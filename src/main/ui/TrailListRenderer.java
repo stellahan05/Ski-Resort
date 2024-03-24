@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
+// Represents the renderer that renders the list of trails with its difficulty icon
 public class TrailListRenderer extends DefaultListCellRenderer {
 
     public Component getListCellRendererComponent(JList<?> list, Object value, int index,
@@ -15,7 +16,7 @@ public class TrailListRenderer extends DefaultListCellRenderer {
         if (value instanceof Trail) {
             Trail trail = (Trail) value;
             label.setText(trail.getName());
-            // Customize appearance based on difficulty
+            // Customize shape based on difficulty
             if (trail.getDifficulty().equalsIgnoreCase("easy")) {
                 label.setIcon(createDifficultyShape(Color.GREEN, "easy")); // Green for easy
             } else if (trail.getDifficulty().equalsIgnoreCase("intermediate")) {
@@ -28,6 +29,7 @@ public class TrailListRenderer extends DefaultListCellRenderer {
         return label;
     }
 
+    // EFFECTS: creates an icon with shape based on color and difficulty
     private ImageIcon createDifficultyShape(Color color, String difficulty) {
         int size = 20;
         ImageIcon icon = new ImageIcon(new BufferedImage(size, size, BufferedImage.TYPE_INT_ARGB));
@@ -43,10 +45,6 @@ public class TrailListRenderer extends DefaultListCellRenderer {
                 break;
             case "advanced":
                 g2d.fillPolygon(new int[]{size / 2, 0, size}, new int[]{0, size, size}, 3);
-                break;
-            default:
-                // Default to green circle for unknown difficulty
-                g2d.fillOval(0, 0, size, size);
                 break;
         }
 

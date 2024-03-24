@@ -9,6 +9,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+// Represents the listener for adding a trail
 public class AddTrailListener implements ActionListener, DocumentListener {
     private DefaultListModel<Trail> listModel;
     private JTextField trailName;
@@ -27,6 +28,8 @@ public class AddTrailListener implements ActionListener, DocumentListener {
         this.trailList = list;
     }
 
+    // MODIFIES: this
+    // EFFECTS: adds new trail to listModel
     public void actionPerformed(ActionEvent e) {
         String name = trailName.getText();
         String difficulty = trailDifficulty.getText();
@@ -49,6 +52,7 @@ public class AddTrailListener implements ActionListener, DocumentListener {
         trailList.ensureIndexIsVisible(index);
     }
 
+    // EFFECTS: returns true if given trail name is already in the list
     protected boolean alreadyInList(String name) {
         for (int i = 0; i < listModel.getSize(); i++) {
             Trail trail = listModel.getElementAt(i);
@@ -59,26 +63,36 @@ public class AddTrailListener implements ActionListener, DocumentListener {
         return false;
     }
 
+    // MODIFIES: this
+    // EFFECTS: enables the addTrailButton when text inserted
     public void insertUpdate(DocumentEvent e) {
         enableButton();
     }
 
+    // MODIFIES: this
+    // EFFECTS: handles empty text field and disables addTrailButton
     public void removeUpdate(DocumentEvent e) {
         handleEmptyTextField(e);
     }
 
+    // MODIFIES: this
+    // EFFECTS: handles empty text field and enables addTrailButton if not empty
     public void changedUpdate(DocumentEvent e) {
         if (!handleEmptyTextField(e)) {
             enableButton();
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: enables addTrailButton
     private void enableButton() {
         if (!alreadyEnabled) {
             addTrailButton.setEnabled(true);
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: handles empty text field, returns true if text field is empty; false otherwise
     private boolean handleEmptyTextField(DocumentEvent e) {
         if (e.getDocument().getLength() <= 0) {
             addTrailButton.setEnabled(false);
