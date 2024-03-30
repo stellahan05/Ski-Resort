@@ -4,10 +4,6 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import persistence.Writable;
 
-import java.io.FileWriter;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -30,12 +26,14 @@ public class Trails implements Writable {
     // EFFECTS: adds given trail to the list
     public void addTrail(Trail trail) {
         trails.add(trail);
+        EventLog.getInstance().logEvent(new Event(trail.getName() + " trail added."));
     }
 
     // MODIFIES: this
     // EFFECTS: removes given trail from the list
     public void removeTrail(Trail trail) {
         trails.remove(trail);
+        EventLog.getInstance().logEvent(new Event(trail.getName() + " trail removed."));
     }
 
     // EFFECTS: returns a list of all trail names

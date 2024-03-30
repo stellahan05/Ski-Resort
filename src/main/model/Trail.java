@@ -42,12 +42,14 @@ public class Trail implements Writable {
 
     public void setStatus(boolean isOpen) {
         this.isOpen = isOpen;
+        EventLog.getInstance().logEvent(new Event("Status changed for " + this.getName() + " trail."));
     }
 
     // MODIFIES: this
     // EFFECTS: adds a review to reviews
     public void addReview(Review review) {
         reviews.add(review);
+        EventLog.getInstance().logEvent(new Event("Review added for " + this.getName() + " trail."));
     }
 
     // EFFECTS: calculates the average rating of the trail
