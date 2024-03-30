@@ -11,6 +11,7 @@ public class Main {
             new SkiResortApp();
 
             Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+                System.out.println("Event log:");
                 EventLog eventLog = EventLog.getInstance();
 
                 for (Event event : eventLog) {

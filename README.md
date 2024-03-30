@@ -43,6 +43,17 @@ to skiResort.json in the data package.
 - You can reload the state of my application by clicking on the "Load" button. The previously saved json file will be
 loaded into the GUI.
 
+## **Event Log sample**
+Event log:
+Sat Mar 30 15:35:37 PDT 2024
+Collins trail added.
+Sat Mar 30 15:35:41 PDT 2024
+Horizon trail added.
+Sat Mar 30 15:35:46 PDT 2024
+Status changed for Collins trail.
+Sat Mar 30 15:35:54 PDT 2024
+Review added for Horizon trail.
+
 
 ### Future Ideas
 

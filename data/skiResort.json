@@ -1,1 +1,18 @@
-[{"difficulty":"Easy","isOpen":true,"reviews":[],"name":"Collins"},{"difficulty":"Advanced","isOpen":true,"reviews":[],"name":"Blaster"}]
+{"trails": [
+    {
+        "difficulty": "Easy",
+        "isOpen": false,
+        "reviews": [],
+        "name": "Collins"
+    },
+    {
+        "difficulty": "Intermediate",
+        "isOpen": true,
+        "reviews": [{
+            "author": "Stella",
+            "rating": 5,
+            "description": "Great"
+        }],
+        "name": "Horizon"
+    }
+]}
