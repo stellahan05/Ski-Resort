@@ -44,15 +44,23 @@ to skiResort.json in the data package.
 loaded into the GUI.
 
 ## **Event Log sample**
-Event log:
-Sat Mar 30 15:35:37 PDT 2024
-Collins trail added.
-Sat Mar 30 15:35:41 PDT 2024
-Horizon trail added.
-Sat Mar 30 15:35:46 PDT 2024
-Status changed for Collins trail.
-Sat Mar 30 15:35:54 PDT 2024
+Event log:  
+Sat Mar 30 15:35:37 PDT 2024  
+Collins trail added.  
+Sat Mar 30 15:35:41 PDT 2024  
+Horizon trail added.  
+Sat Mar 30 15:35:46 PDT 2024  
+Status changed for Collins trail.  
+Sat Mar 30 15:35:54 PDT 2024  
 Review added for Horizon trail.
+
+## **Phase 4: Task 3**
+One potential refactoring to improve my project's design that I would consider is to split up the SkiResortGUI class
+into smaller, more specialized classes. The methods saveDataToFile() and loadDataFromFile() handle both GUI interaction
+and data persistence concerns. To address this, these methods could be moved to a separate class dedicated solely to 
+data management. By doing so, the SkiResortGUI class can focus on managing the GUI components and user interactions, 
+while the new data management class handles saving and loading trail data with IO exceptions. This separation adheres 
+more closely to the Single Responsibility Principle (SPR), improving the maintainability and readability of the code.
 
 
 ### Future Ideas
