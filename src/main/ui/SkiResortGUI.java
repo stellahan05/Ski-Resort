@@ -1,5 +1,7 @@
 package ui;
 
+import model.Event;
+import model.EventLog;
 import model.Trail;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -7,6 +9,8 @@ import org.json.JSONObject;
 import javax.swing.*;
 import javax.swing.event.*;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -247,9 +251,20 @@ public class SkiResortGUI extends JPanel implements ListSelectionListener {
         JFrame frame = new JFrame("Ski Resort App");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+        EventLog eventLog = EventLog.getInstance();
         JComponent newContentPane = new SkiResortGUI();
         newContentPane.setOpaque(true);
         frame.setContentPane(newContentPane);
+
+        frame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                System.out.println("Event log:");
+                for (Event event : eventLog) {
+                    System.out.println(event.toString());
+                }
+            }
+        });
 
         frame.pack();
         frame.setVisible(true);

@@ -1,7 +1,6 @@
 package ui;
 
-import model.Trail;
-
+import model.*;
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;

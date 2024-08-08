@@ -1,18 +1,1 @@
-{"trails": [
-    {
-        "difficulty": "Easy",
-        "isOpen": false,
-        "reviews": [],
-        "name": "Collins"
-    },
-    {
-        "difficulty": "Intermediate",
-        "isOpen": true,
-        "reviews": [{
-            "author": "Stella",
-            "rating": 5,
-            "description": "Great"
-        }],
-        "name": "Horizon"
-    }
-]}
+[{"difficulty":"Easy","isOpen":true,"reviews":[],"name":"Collins"},{"difficulty":"Intermediate","isOpen":true,"reviews":[],"name":"Horizon"},{"difficulty":"Advanced","isOpen":true,"reviews":[],"name":"Blaster"},{"difficulty":"easy","isOpen":true,"reviews":[],"name":"collins"},{"difficulty":"intermediate","isOpen":true,"reviews":[],"name":"stella"}]

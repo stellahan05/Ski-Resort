@@ -1,6 +1,6 @@
 package ui;
 
-import model.Trail;
+import model.*;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
