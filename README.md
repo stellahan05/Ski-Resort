@@ -27,7 +27,7 @@ interests.
 - As a user, I want to be able to save my ski resort app with the list of trails to file (if I so choose)
 - As a user, I want to be able to be able to load my ski resort app from file (if I so choose)
 
-## **Instructions for Grader**
+## **Instructions for User**
 - You can add a trail to the list of trails by entering the name and difficulty of the new trail in the respective
 input fields, then by clicking on the "Add Trail" button. The new trail will be added to the list
 displayed in the GUI.
@@ -54,7 +54,7 @@ Status changed for Collins trail.
 Sat Mar 30 15:35:54 PDT 2024  
 Review added for Horizon trail.
 
-## **Phase 4: Task 3**
+## **Potential Refactoring**
 One potential refactoring to improve my project's design that I would consider is to split up the SkiResortGUI class
 into smaller, more specialized classes. The methods saveDataToFile() and loadDataFromFile() handle both GUI interaction
 and data persistence concerns. To address this, these methods could be moved to a separate class dedicated solely to 
